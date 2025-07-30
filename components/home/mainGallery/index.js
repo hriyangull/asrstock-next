@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import ResponsiveMasonryWrapper from "../../common/ResponsiveMasonryWrapper";
 import { getProductDataAction } from "../../../redux/actions/home";
 import SingleAudio from "../../singleAudio";
 import SingleImage from "../../singleImage";
@@ -41,49 +41,49 @@ const MainGallery = (props) => {
           {props.main_gallery?.length === 0 ? (
             <h2 className="text-center pt-5">{t("No Data Found")}</h2>
           ) : (
-            <ResponsiveMasonry
+            <ResponsiveMasonryWrapper
               columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
+              gutter="10px"
+              className="gallery mesonary-gallery g-2"
             >
-              <Masonry gutter="10px" className="gallery mesonary-gallery g-2">
-                {props.main_gallery?.map((item, i) => (
-                  <Fragment key={i}>
-                    {item.content_type === 'audio' ? (
-                      <SingleAudio
-                        item={item}
-                        handleOpenSave={() => {
-                          props.saveOpen();
-                          props.setProductId(item.id);
-                        }}
-                      />
-                    ) : item.content_type === 'video' ? (
-                      <SingleVideo
-                        item={item}
-                        handleOpenSave={() => {
-                          props.saveOpen();
-                          props.setProductId(item.id);
-                        }}
-                      />
-                    ) : item.content_type === 'image' ? (
-                      <SingleImage
-                        item={item}
-                        handleOpenSave={() => {
-                          props.saveOpen();
-                          props.setProductId(item.id);
-                        }}
-                      />
-                    ) : (
-                      <SingleImage
-                        item={item}
-                        handleOpenSave={() => {
-                          props.saveOpen();
-                          props.setProductId(item.id);
-                        }}
-                      />
-                    )}
-                  </Fragment>
-                ))}
-              </Masonry>
-            </ResponsiveMasonry>
+              {props.main_gallery?.map((item, i) => (
+                <Fragment key={i}>
+                  {item.content_type === 'audio' ? (
+                    <SingleAudio
+                      item={item}
+                      handleOpenSave={() => {
+                        props.saveOpen();
+                        props.setProductId(item.id);
+                      }}
+                    />
+                  ) : item.content_type === 'video' ? (
+                    <SingleVideo
+                      item={item}
+                      handleOpenSave={() => {
+                        props.saveOpen();
+                        props.setProductId(item.id);
+                      }}
+                    />
+                  ) : item.content_type === 'image' ? (
+                    <SingleImage
+                      item={item}
+                      handleOpenSave={() => {
+                        props.saveOpen();
+                        props.setProductId(item.id);
+                      }}
+                    />
+                  ) : (
+                    <SingleImage
+                      item={item}
+                      handleOpenSave={() => {
+                        props.saveOpen();
+                        props.setProductId(item.id);
+                      }}
+                    />
+                  )}
+                </Fragment>
+              ))}
+            </ResponsiveMasonryWrapper>
           )}
           {!(props.main_gallery?.length === 0) && (
             <div className="item-button">

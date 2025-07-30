@@ -13,7 +13,7 @@ import SingleVideo from "../components/singleVideo";
 import { objectToQueryString } from "../utils/commonFunctions";
 import { getServerApiRequest } from "../utils/serverApi";
 import MetaHead from "../components/MetaHead";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import ResponsiveMasonryWrapper from "../components/common/ResponsiveMasonryWrapper";
 import Link from "next/link";
 
 const FilterProducts = (props) => {
@@ -94,49 +94,49 @@ const FilterProducts = (props) => {
                         {props.search_data?.products?.data.length === 0 ? (
                           <h2 className="text-center pt-5">{t("No Data Found")}</h2>
                         ) : (
-                          <ResponsiveMasonry
+                          <ResponsiveMasonryWrapper
                             columnsCountBreakPoints={{ 350: 1, 700: 2, 900: 3, 1200: 4 }}
+                            gutter="10px"
+                            className="gallery mesonary-gallery g-2"
                           >
-                            <Masonry gutter="10px" className="gallery mesonary-gallery g-2">
-                              {props.search_data?.products?.data.map((item, i) => (
-                                <Fragment key={i}>
-                                  {item.content_type === 'audio' ? (
-                                    <SingleAudio
-                                      item={item}
-                                      handleOpenSave={() => {
-                                        handleOpenSave();
-                                        setProductId(item.id);
-                                      }}
-                                    />
-                                  ) : item.content_type === 'video' ? (
-                                    <SingleVideo
-                                      item={item}
-                                      handleOpenSave={() => {
-                                        handleOpenSave();
-                                        setProductId(item.id);
-                                      }}
-                                    />
-                                  ) : item.content_type === 'image' ? (
-                                    <SingleImage
-                                      item={item}
-                                      handleOpenSave={() => {
-                                        handleOpenSave();
-                                        setProductId(item.id);
-                                      }}
-                                    />
-                                  ) : (
-                                    <SingleImage
-                                      item={item}
-                                      handleOpenSave={() => {
-                                        handleOpenSave();
-                                        setProductId(item.id);
-                                      }}
-                                    />
-                                  )}
-                                </Fragment>
-                              ))}
-                            </Masonry>
-                          </ResponsiveMasonry>
+                            {props.search_data?.products?.data.map((item, i) => (
+                              <Fragment key={i}>
+                                {item.content_type === 'audio' ? (
+                                  <SingleAudio
+                                    item={item}
+                                    handleOpenSave={() => {
+                                      handleOpenSave();
+                                      setProductId(item.id);
+                                    }}
+                                  />
+                                ) : item.content_type === 'video' ? (
+                                  <SingleVideo
+                                    item={item}
+                                    handleOpenSave={() => {
+                                      handleOpenSave();
+                                      setProductId(item.id);
+                                    }}
+                                  />
+                                ) : item.content_type === 'image' ? (
+                                  <SingleImage
+                                    item={item}
+                                    handleOpenSave={() => {
+                                      handleOpenSave();
+                                      setProductId(item.id);
+                                    }}
+                                  />
+                                ) : (
+                                  <SingleImage
+                                    item={item}
+                                    handleOpenSave={() => {
+                                      handleOpenSave();
+                                      setProductId(item.id);
+                                    }}
+                                  />
+                                )}
+                              </Fragment>
+                            ))}
+                          </ResponsiveMasonryWrapper>
                         )}
                       </section>
                     </div>
