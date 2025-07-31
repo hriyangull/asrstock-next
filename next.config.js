@@ -6,7 +6,7 @@ const withPWA = require('next-pwa')({
 module.exports = withPWA({
   reactStrictMode: false,
   env: {
-    BASE_URL: process.env.BASE_URL || 'https://demo.asrstock.com/api/',
-    FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000/'
+    BASE_URL: process.env.BASE_URL || 'https://admin.asrstock.com/api/',
+    FRONTEND_URL: process.env.FRONTEND_URL || 'https://asrstock.com/'
   },
 })
